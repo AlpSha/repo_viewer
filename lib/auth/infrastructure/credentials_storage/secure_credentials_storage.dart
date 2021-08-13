@@ -13,7 +13,7 @@ class SecureCredentialsStorage implements CredentialsStorage {
 
   @override
   Future<Credentials?> read() async {
-    if (_cachedCredentials == null) {
+    if (_cachedCredentials != null) {
       return _cachedCredentials;
     }
     final json = await _storage.read(key: _key);
