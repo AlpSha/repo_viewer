@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'github_headers.freezed.dart';
-part 'github_headers.g.dart';
+part '../../../core/infrastructure/github_headers.freezed.dart';
+part '../../../core/infrastructure/github_headers.g.dart';
 
 @freezed
 class GithubHeaders with _$GithubHeaders {
