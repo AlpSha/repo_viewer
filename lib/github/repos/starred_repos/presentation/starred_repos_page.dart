@@ -10,10 +10,10 @@ class StarredReposPage extends ConsumerWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          child: Text('Sign Out'),
           onPressed: () {
             ref.read(authNotifierProvider.notifier).signOut();
           },
+          child: const Text('Sign Out'),
         ),
       ),
     );
