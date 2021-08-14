@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../github/core/infrastructure/github_headers.dart';
+part of 'github_headers.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
