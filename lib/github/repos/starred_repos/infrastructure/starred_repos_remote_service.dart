@@ -63,10 +63,20 @@ class StarredReposRemoteService {
           maxPage: previousHeaders?.link?.maxPage ?? 0,
         );
       } else if (e.response != null) {
-        throw RestApiException(e.response?.statusCode);
+        if (e.response!.statusCode == 304) {
+          return RemoteResponse.notModified(
+            maxPage: previousHeaders?.link?.maxPage ?? 0,
+          );
+        } else {
+          throw RestApiException(e.response?.statusCode);
+        }
       } else {
         rethrow;
       }
+    } catch (e, st) {
+      print(e);
+      print(st);
+      rethrow;
     }
   }
 }
