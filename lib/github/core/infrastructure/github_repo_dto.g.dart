@@ -6,16 +6,15 @@ part of 'github_repo_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GithubRepoDTO _$_$_GithubRepoDTOFromJson(Map<String, dynamic> json) {
-  return _$_GithubRepoDTO(
-    owner: UserDTO.fromJson(json['owner'] as Map<String, dynamic>),
-    name: json['name'] as String,
-    description: _descriptionFromJson(json['description']),
-    stargazersCount: json['stargazers_count'] as int,
-  );
-}
+_$_GithubRepoDTO _$$_GithubRepoDTOFromJson(Map<String, dynamic> json) =>
+    _$_GithubRepoDTO(
+      owner: UserDTO.fromJson(json['owner'] as Map<String, dynamic>),
+      name: json['name'] as String,
+      description: _descriptionFromJson(json['description']),
+      stargazersCount: json['stargazers_count'] as int,
+    );
 
-Map<String, dynamic> _$_$_GithubRepoDTOToJson(_$_GithubRepoDTO instance) =>
+Map<String, dynamic> _$$_GithubRepoDTOToJson(_$_GithubRepoDTO instance) =>
     <String, dynamic>{
       'owner': instance.owner.toJson(),
       'name': instance.name,

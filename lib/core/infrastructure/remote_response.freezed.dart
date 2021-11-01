@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'remote_response.dart';
 
@@ -51,6 +52,13 @@ mixin _$RemoteResponse<T> {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(int maxPage)? noConnection,
+    TResult Function(int maxPage)? notModified,
+    TResult Function(T data, int maxPage)? withNewData,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int maxPage)? noConnection,
     TResult Function(int maxPage)? notModified,
@@ -63,6 +71,13 @@ mixin _$RemoteResponse<T> {
     required TResult Function(_NoConnection<T> value) noConnection,
     required TResult Function(_NotModified<T> value) notModified,
     required TResult Function(_WithNewData<T> value) withNewData,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_NoConnection<T> value)? noConnection,
+    TResult Function(_NotModified<T> value)? notModified,
+    TResult Function(_WithNewData<T> value)? withNewData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -185,6 +200,16 @@ class _$_NoConnection<T> extends _NoConnection<T> {
 
   @override
   @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(int maxPage)? noConnection,
+    TResult Function(int maxPage)? notModified,
+    TResult Function(T data, int maxPage)? withNewData,
+  }) {
+    return noConnection?.call(maxPage);
+  }
+
+  @override
+  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int maxPage)? noConnection,
     TResult Function(int maxPage)? notModified,
@@ -205,6 +230,16 @@ class _$_NoConnection<T> extends _NoConnection<T> {
     required TResult Function(_WithNewData<T> value) withNewData,
   }) {
     return noConnection(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_NoConnection<T> value)? noConnection,
+    TResult Function(_NotModified<T> value)? notModified,
+    TResult Function(_WithNewData<T> value)? withNewData,
+  }) {
+    return noConnection?.call(this);
   }
 
   @override
@@ -310,6 +345,16 @@ class _$_NotModified<T> extends _NotModified<T> {
 
   @override
   @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(int maxPage)? noConnection,
+    TResult Function(int maxPage)? notModified,
+    TResult Function(T data, int maxPage)? withNewData,
+  }) {
+    return notModified?.call(maxPage);
+  }
+
+  @override
+  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int maxPage)? noConnection,
     TResult Function(int maxPage)? notModified,
@@ -330,6 +375,16 @@ class _$_NotModified<T> extends _NotModified<T> {
     required TResult Function(_WithNewData<T> value) withNewData,
   }) {
     return notModified(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_NoConnection<T> value)? noConnection,
+    TResult Function(_NotModified<T> value)? notModified,
+    TResult Function(_WithNewData<T> value)? withNewData,
+  }) {
+    return notModified?.call(this);
   }
 
   @override
@@ -446,6 +501,16 @@ class _$_WithNewData<T> extends _WithNewData<T> {
 
   @override
   @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(int maxPage)? noConnection,
+    TResult Function(int maxPage)? notModified,
+    TResult Function(T data, int maxPage)? withNewData,
+  }) {
+    return withNewData?.call(data, maxPage);
+  }
+
+  @override
+  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int maxPage)? noConnection,
     TResult Function(int maxPage)? notModified,
@@ -466,6 +531,16 @@ class _$_WithNewData<T> extends _WithNewData<T> {
     required TResult Function(_WithNewData<T> value) withNewData,
   }) {
     return withNewData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_NoConnection<T> value)? noConnection,
+    TResult Function(_NotModified<T> value)? notModified,
+    TResult Function(_WithNewData<T> value)? withNewData,
+  }) {
+    return withNewData?.call(this);
   }
 
   @override

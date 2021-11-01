@@ -6,10 +6,10 @@ import 'package:repo_viewer/splash/presentation/splash_page.dart';
 
 @MaterialAutoRouter(
   routes: [
-    MaterialRoute(page: SplashPage, initial: true),
-    MaterialRoute(page: SignInPage, path: '/sign-in'),
-    MaterialRoute(page: AuthorizationPage, path: '/auth'),
-    MaterialRoute(page: StarredReposPage, path: '/starred'),
+    AutoRoute(page: SplashPage, initial: true),
+    AutoRoute(page: SignInPage, path: '/sign-in'),
+    AutoRoute(page: AuthorizationPage, path: '/auth'),
+    AutoRoute(page: StarredReposPage, path: '/starred'),
   ],
   replaceInRouteName: 'Page,Route',
 )
