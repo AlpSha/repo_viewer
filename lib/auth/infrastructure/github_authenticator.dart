@@ -79,10 +79,19 @@ class GithubAuthenticator {
     }
   }
 
-  Future<Either<AuthFailure, Unit>> signOut() async {
-    final accessToken = await _credentialsStorage.read().then((credentials) => credentials?.accessToken);
-    final authorization = stringToBase64.encode('$clientId:$clientSecret');
+  Future<Either<AuthFailure, Unit>> clearCredentialsStorage() async {
     try {
+      await _credentialsStorage.clear();
+      return right(unit);
+    } on PlatformException {
+      return left(const AuthFailure.storage());
+    }
+  }
+
+  Future<Either<AuthFailure, Unit>> signOut() async {
+    try {
+      final accessToken = await _credentialsStorage.read().then((credentials) => credentials?.accessToken);
+      final authorization = stringToBase64.encode('$clientId:$clientSecret');
       try {
         _dio.deleteUri(
           revocationEndpoint,
@@ -102,8 +111,7 @@ class GithubAuthenticator {
           rethrow;
         }
       }
-      await _credentialsStorage.clear();
-      return right(unit);
+      return clearCredentialsStorage();
     } on PlatformException {
       return left(const AuthFailure.storage());
     }
@@ -122,7 +130,7 @@ class GithubAuthenticator {
       return right(refreshedCredentials);
     } on FormatException {
       return left(const AuthFailure.server());
-    } on AuthorizationException catch(e) {
+    } on AuthorizationException catch (e) {
       return left(AuthFailure.server('${e.error}: ${e.description}'));
     } on PlatformException {
       return left(const AuthFailure.storage());
