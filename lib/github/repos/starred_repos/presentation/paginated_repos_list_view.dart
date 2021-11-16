@@ -1,18 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_viewer/github/core/shared/providers.dart';
+import 'package:repo_viewer/github/repos/starred_repos/application/starred_repos_notifier.dart';
 import 'package:repo_viewer/github/repos/starred_repos/presentation/failure_repo_tile.dart';
 import 'package:repo_viewer/github/repos/starred_repos/presentation/loading_repo_tile.dart';
 import 'package:repo_viewer/github/repos/starred_repos/presentation/repo_tile.dart';
 
-class PaginatedReposListView extends ConsumerWidget {
+class PaginatedReposListView extends ConsumerStatefulWidget {
   const PaginatedReposListView({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _PaginatedReposListViewState createState() => _PaginatedReposListViewState();
+}
+
+class _PaginatedReposListViewState extends ConsumerState<PaginatedReposListView> {
+  bool canLoadNextPage = false;
+
+  @override
+  Widget build(BuildContext context) {
+    ref.listen<StarredReposState>(starredReposNotifierProvider, (state) {
+      state.map(
+        initial: (_) => canLoadNextPage = true,
+        loadInProgress: (_) => canLoadNextPage = false,
+        loadFailure: (_) => canLoadNextPage = false,
+        loadSuccess: (_) => canLoadNextPage = _.isNextPageAvailable,
+      );
+    });
     final state = ref.watch(starredReposNotifierProvider);
+    return NotificationListener<ScrollNotification>(
+      onNotification: (notification) {
+        final metrics = notification.metrics;
+        final limit = metrics.maxScrollExtent - metrics.viewportDimension / 3;
+        if (canLoadNextPage && metrics.pixels >= limit) {
+          canLoadNextPage = false;
+          ref.read(starredReposNotifierProvider.notifier).getNextStarredReposPage();
+        }
+        return false;
+      },
+      child: _PaginatedListView(
+        state: state,
+      ),
+    );
+  }
+}
+
+class _PaginatedListView extends StatelessWidget {
+  const _PaginatedListView({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final StarredReposState state;
+
+  @override
+  Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: state.map(
         initial: (_) => 0,
