@@ -15,6 +15,7 @@ final initializationProvider = FutureProvider<Unit>((ref) async {
       headers: {
         'Accept': 'application/vnd.github.v3.html+json',
       },
+      validateStatus: (status) => status != null && status >= 200 && status < 400,
     )
     ..interceptors.add(ref.read(oAuth2InterceptorProvider));
   final authNotifier = ref.read(authNotifierProvider.notifier);
@@ -27,26 +28,24 @@ class AppWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future.delayed(Duration.zero).then((_) {
-      ref.listen<AuthState>(authNotifierProvider, (state) {
-        state.maybeMap(
-          orElse: () {},
-          authenticated: (_) {
-            appRouter.pushAndPopUntil(
-              const StarredReposRoute(),
-              predicate: (_) => false,
-            );
-          },
-          unauthenticated: (_) {
-            appRouter.pushAndPopUntil(
-              const SignInRoute(),
-              predicate: (_) => false,
-            );
-          },
-        );
-      });
-      ref.listen(initializationProvider, (_) {});
+    ref.listen<AuthState>(authNotifierProvider, (state) {
+      state.maybeMap(
+        orElse: () {},
+        authenticated: (_) {
+          appRouter.pushAndPopUntil(
+            const StarredReposRoute(),
+            predicate: (_) => false,
+          );
+        },
+        unauthenticated: (_) {
+          appRouter.pushAndPopUntil(
+            const SignInRoute(),
+            predicate: (_) => false,
+          );
+        },
+      );
     });
+    ref.listen(initializationProvider, (_) {});
     return MaterialApp.router(
       title: 'Repo Viewer',
       routerDelegate: AutoRouterDelegate(appRouter),
