@@ -14,7 +14,7 @@ dependencies:
   cached_network_image: ^3.1.0
   dartz: ^0.10.0-nullsafety.2
   dio: ^4.0.0
-  flash: ^2.0.1
+  flash: ^2.0.3
   flutter:
     sdk: flutter
   flutter_hooks: ^0.18.0
